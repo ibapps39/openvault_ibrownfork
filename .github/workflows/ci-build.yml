@@ -286,7 +286,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: fallout-ce-windows-${{ matrix.arch }}
-          path: uild/RelWithDebInfo/fallout-ce-windows-${{ matrix.arch }}.exe
+          path: build/RelWithDebInfo/fallout-ce-windows-${{ matrix.arch }}.exe
           retention-days: 7
 
 
