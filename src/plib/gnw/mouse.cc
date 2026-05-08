@@ -505,6 +505,7 @@ void mouse_info()
         y = 0;
     }
 
+    // Adjust for mouse senstivity.
     x = (int)(x * mouse_sensitivity);
     y = (int)(y * mouse_sensitivity);
 
@@ -522,6 +523,8 @@ void mouse_info()
 
     mouse_simulate_input(x, y, buttons);
 
+    // TODO: Move to `_mouse_simulate_input`.
+    // TODO: Record wheel event in VCR.
     gMouseWheelX = mouseData.wheelX;
     gMouseWheelY = mouseData.wheelY;
 
