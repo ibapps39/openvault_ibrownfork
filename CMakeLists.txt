@@ -302,7 +302,8 @@ endif()
 
 if(MSVC)
     target_link_libraries(${EXECUTABLE_NAME} 
-        winmm
+        debug msvcprtd
+        optimized msvcprt
     )
 endif()
 
