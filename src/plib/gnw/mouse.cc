@@ -883,6 +883,7 @@ double mouse_get_sensitivity()
 {
     if (value > 0 && value <= 2.5) {
     return mouse_sensitivity;
+    }
 }
 
 // 0x4B54FC
