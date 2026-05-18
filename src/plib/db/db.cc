@@ -2815,7 +2815,7 @@ static bool db_has_case_variant(const std::string& full_path, std::string& actua
     std::string dir = sep != std::string::npos ? full_path.substr(0, sep) : std::string(".");
     std::string target = sep != std::string::npos ? full_path.substr(sep + 1) : full_path;
 
-    DIR* d = opendir(dir.c_str());
+    DB_FIND_DATA* d = opendir(dir.c_str());
     if (d == NULL) {
         return false;
     }
