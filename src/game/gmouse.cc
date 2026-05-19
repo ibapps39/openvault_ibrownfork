@@ -1410,7 +1410,7 @@ void gmouse_3d_toggle_mode()
     } else {
         // Original toggle behavior: cycle through MOVE -> ARROW -> CROSSHAIR
         mode = (gmouse_3d_current_mode + 1) % 3;
-        
+
         if (isInCombat()) {
             Object* item;
             if (intface_get_current_item(&item) == 0) {
