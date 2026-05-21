@@ -139,7 +139,6 @@ bool dxinput_read_keyboard_buffer(KeyboardData* keyboardData)
 bool dxinput_mouse_init()
 {
     SDL_ShowCursor(SDL_DISABLE);
-    gMousePrevInitialized = false;
     return true;
 }
 
