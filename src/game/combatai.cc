@@ -617,10 +617,8 @@ Object* ai_danger_source(Object* a1)
     ai_sort_list(targets, 4, a1);
 
     for (index = 0; index < 4; index++) {
-        Object* candidate = targets[index];
-        if (candidate != NULL && is_within_perception(a1, candidate)) {
-            return candidate;
-            debug_printf("\nError: I couldn't get at my target!  Picking alternate!");
+        if (targets[index] != NULL && is_within_perception(a1, targets[index])) {
+            return targets[index];
         }
     }
 
