@@ -190,7 +190,7 @@ long audiofSeek(int fileHandle, long offset, int origin)
         assert(false && "Should be unreachable");
     }
 
-        if (a4 < 0) {
+    if (a4 < 0) {
         a4 = 0;
     }
     if (a4 > audioFile->fileSize) {
