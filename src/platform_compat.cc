@@ -203,13 +203,11 @@ long compat_tell(int fd)
     return lseek(fd, 0, SEEK_CUR);
 }
 
-long compat_filelength(int fd)
+long compat_filelength(const char* path)
 {
-    long originalOffset = lseek(fd, 0, SEEK_CUR);
-    lseek(fd, 0, SEEK_SET);
-    long filesize = lseek(fd, 0, SEEK_END);
-    lseek(fd, originalOffset, SEEK_SET);
-    return filesize;
+    char nativePath[COMPAT_MAX_PATH];
+    compat_prepare_native_path(nativePath, path);
+    return filesize(nativePath);
 }
 
 int compat_mkdir(const char* path)
