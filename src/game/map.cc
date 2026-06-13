@@ -1603,7 +1603,10 @@ static void map_match_map_number()
 // 0x475C3C
 static void map_display_draw(Rect* rect)
 {
-    win_draw_rect(display_win, rect);
+    // Refresh all windows for this rectangle so background fills are
+    // processed before the display window is drawn (prevents background
+    // WIN_FILL_RECT from overwriting freshly blitted map content).
+    win_refresh_all(rect);
 }
 
 // 0x475C50
