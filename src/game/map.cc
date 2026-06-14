@@ -760,7 +760,7 @@ int map_scroll(int dx, int dy)
     Rect r2;
     rectCopy(&r2, &r1);
 
-    int width = scr_size.lrx - scr_size.ulx + 1;
+    int width = screenGetWidth();
     int pitch = width;
     int height = scr_size.lry - scr_size.uly - 99;
 
