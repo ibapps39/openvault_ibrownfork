@@ -229,7 +229,7 @@ int gnw_main(int argc, char** argv)
                 main_selfrun_play();
                 break;
             case MAIN_MENU_OPTIONS:
-                mainMenuWindowHide(true);
+                main_menu_hide(true);
                 do_prefscreen();
                 break;
             case MAIN_MENU_CREDITS:
