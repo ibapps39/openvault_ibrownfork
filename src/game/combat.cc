@@ -1630,7 +1630,7 @@ int combat_load(DB_FILE* stream)
         while (obj != NULL) {
             if (PID_TYPE(obj->pid) == OBJ_TYPE_CRITTER) {
                 if (obj->data.critter.combat.whoHitMeCid == -1) {
-                    obj->data.critter.combat.whoHitMe = NULL;
+                    critter_set_who_hit_me(obj, NULL);
                 }
             }
             obj = obj_find_next();
@@ -1656,20 +1656,20 @@ int combat_load(DB_FILE* stream)
 
     for (i = 0; i < list_total; i++) {
         if (combat_list[i]->data.critter.combat.whoHitMeCid == -1) {
-            combat_list[i]->data.critter.combat.whoHitMe = NULL;
+            critter_set_who_hit_me(combat_list[i], NULL);
         } else {
             // NOTE: Uninline.
             j = find_cid(0, combat_list[i]->data.critter.combat.whoHitMeCid, combat_list, list_total);
             if (j == list_total) {
-                combat_list[i]->data.critter.combat.whoHitMe = NULL;
+                critter_set_who_hit_me(combat_list[i], NULL);
             } else {
                 // BUGFIX: Validate that restored whoHitMe is not self (prevents self-attack bug)
                 // Also prevent same-team targeting to avoid infinite combat loops
                 Object* candidate = combat_list[j];
                 if (candidate == combat_list[i] || candidate->data.critter.combat.team == combat_list[i]->data.critter.combat.team) {
-                    combat_list[i]->data.critter.combat.whoHitMe = NULL;
+                    critter_set_who_hit_me(combat_list[i], NULL);
                 } else {
-                    combat_list[i]->data.critter.combat.whoHitMe = candidate;
+                    critter_set_who_hit_me(combat_list[i], candidate);
                 }
             }
         }
