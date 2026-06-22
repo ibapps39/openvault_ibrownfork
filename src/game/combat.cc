@@ -4778,7 +4778,7 @@ void combat_delete_critter(Object* obj)
     obj->data.critter.combat.ap = 0;
     obj_remove_outline(obj, NULL);
 
-    obj->data.critter.combat.whoHitMe = NULL;
+    critter_set_who_hit_me(obj, NULL);
     combatai_delete_critter(obj);
 }
 
