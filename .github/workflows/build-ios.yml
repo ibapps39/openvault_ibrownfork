@@ -1,0 +1,48 @@
+name: Build iOS IPA
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  ios:
+    name: iOS
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Cache CMake build
+        uses: actions/cache@v4
+        with:
+          path: out/build/ios
+          key: ios-cmake-${{ hashFiles('CMakeLists.txt', 'CMakePresets.json', 'cmake/**') }}
+          restore-keys: |
+            ios-cmake-
+
+      - name: Configure
+        run: |
+          cmake --preset ios \
+            -D CMAKE_XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY="" \
+            -D CMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_ALLOWED="NO"
+
+      - name: Build
+        run: |
+          cmake --build --preset ios-release \
+            -- -jobs $(sysctl -n hw.physicalcpu)
+
+      - name: Package (CPack → .ipa)
+        working-directory: out/build/ios
+        run: cpack -C RelWithDebInfo
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: fallout-ce.ipa
+          path: out/build/ios/fallout-ce.ipa
+          retention-days: 7
