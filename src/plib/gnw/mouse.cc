@@ -417,15 +417,7 @@ void mouse_hide()
 // New version of mouse_info for touch devices
 void mouse_info()
 {
-    if (!have_mouse) {
-        return;
-    }
-
-    if (mouse_is_hidden) {
-        return;
-    }
-
-    if (mouse_disabled) {
+    if (!have_mouse || mouse_is_hidden || mouse_disabled) {
         return;
     }
 
