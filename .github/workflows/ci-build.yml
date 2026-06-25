@@ -338,13 +338,13 @@ jobs:
     steps:
       - name: Search artifacts
         if: ${{ always() && github.ref == 'refs/heads/main' && github.event_name == 'push' }}
-        uses: actions/download-artifact@v4.1.7
+        uses: actions/download-artifact@v4.3.0
         with:
           path: artifacts/
 
       - name: Remove old version
         if: ${{ always() && github.ref == 'refs/heads/main' && github.event_name == 'push' }}
-        uses: dev-drprasad/delete-tag-and-release@v0.2.1
+        uses: dev-drprasad/delete-tag-and-release@v1.1
         with:
           delete_release: true
           tag_name: main
@@ -392,7 +392,7 @@ jobs:
 
       - name: Upload new release
         if: ${{ always() && github.ref == 'refs/heads/main' && github.event_name == 'push' }}
-        uses: softprops/action-gh-release@v0.1.15
+        uses: softprops/action-gh-release@v2.0.8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: artifacts/*
